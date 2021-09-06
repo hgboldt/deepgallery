@@ -1,0 +1,33 @@
+# Translations template for DeepGallery
+# Copyright (C) 2021 Hans Boldt
+# This file is distributed under the same license as the DeepGallery project.
+#
+
+#: deepgallery.gpr.py:4 deepgallery.gpr.py:14
+msgid "Deep Gallery"
+msgstr ""
+
+#: deepgallery.gpr.py:5
+msgid "Gramplet showing all media for active person"
+msgstr ""
+
+#: deepgallery.py:71
+msgid "Double-click on the picture to edit the media object."
+msgstr ""
+
+#: deepgallery.py:72
+msgid "View"
+msgstr ""
+
+#: deepgallery.py:73
+msgid "Open Containing Folder"
+msgstr ""
+
+#: deepgallery.py:74
+msgid "Edit"
+msgstr ""
+
+#: deepgallery.py:75
+msgid "Make Active Media"
+msgstr ""
+
