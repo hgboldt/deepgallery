@@ -1,7 +1,22 @@
-# Translations template for DeepGallery
+# Translations template for deepgrallery.
 # Copyright (C) 2021 Hans Boldt
-# This file is distributed under the same license as the DeepGallery project.
+# This file is distributed under the same license as the deepgrallery
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
 #
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deepgrallery 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-09-06 15:53-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
 
 #: deepgallery.gpr.py:4 deepgallery.gpr.py:14
 msgid "Deep Gallery"
