@@ -275,8 +275,8 @@ class DeepPhoto(Gtk.EventBox):
         self.handle = media.get_handle()
 
         self.connect('button-press-event', self._handle_button_press)
-        self.connect('enter-notify-event', self.enter_notify)
-        self.connect('leave-notify-event', self.leave_notify)
+        self.connect('enter-notify-event', self._enter_notify)
+        self.connect('leave-notify-event', self._leave_notify)
         self.set_tooltip_text(MSG_PHOTO_TOOLTIP)
         self.full_path = media_path_full(dbstate.db, media.get_path())
         self.folder = os.path.split(self.full_path)[0]
@@ -291,7 +291,7 @@ class DeepPhoto(Gtk.EventBox):
         self.photo.set_from_pixbuf(self.normal_pixbuf)
 
 
-    def enter_notify(self, widget, event):
+    def _enter_notify(self, widget, event):
         """
         """
         if not self.large_pixbuf:
@@ -301,7 +301,7 @@ class DeepPhoto(Gtk.EventBox):
         self.photo.set_from_pixbuf(self.large_pixbuf)
 
 
-    def leave_notify(self, widget, event):
+    def _leave_notify(self, widget, event):
         """
         """
         self.photo.set_from_pixbuf(self.normal_pixbuf)
