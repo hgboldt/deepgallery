@@ -44,7 +44,8 @@ from gramps.gen.const import GRAMPS_LOCALE as glocale
 from gramps.gen.utils.file import media_path_full
 from gramps.gui.utils import (is_right_click,
                               open_file_with_default_application)
-from gramps.gen.utils.thumbnails import (get_thumbnail_image, SIZE_NORMAL)
+from gramps.gen.utils.thumbnails import (get_thumbnail_image,
+                                         SIZE_NORMAL, SIZE_LARGE)
 from gramps.gui.editors import EditMedia
 from gramps.gui.widgets.menuitem import add_menuitem
 
@@ -274,16 +275,36 @@ class DeepPhoto(Gtk.EventBox):
         self.handle = media.get_handle()
 
         self.connect('button-press-event', self._handle_button_press)
+        self.connect('enter-notify-event', self.enter_notify)
+        self.connect('leave-notify-event', self.leave_notify)
         self.set_tooltip_text(MSG_PHOTO_TOOLTIP)
         self.full_path = media_path_full(dbstate.db, media.get_path())
         self.folder = os.path.split(self.full_path)[0]
 
-        photo = Gtk.Image()
-        self.add(photo)
-        mime_type = media.get_mime_type()
-        pixbuf = get_thumbnail_image(self.full_path, mime_type, None,
-                                     SIZE_NORMAL)
-        photo.set_from_pixbuf(pixbuf)
+        self.photo = Gtk.Image()
+        self.add(self.photo)
+        self.mime_type = media.get_mime_type()
+        self.normal_pixbuf = get_thumbnail_image(self.full_path,
+                                                 self.mime_type,
+                                                 None, SIZE_NORMAL)
+        self.large_pixbuf = None
+        self.photo.set_from_pixbuf(self.normal_pixbuf)
+
+
+    def enter_notify(self, widget, event):
+        """
+        """
+        if not self.large_pixbuf:
+            self.large_pixbuf = get_thumbnail_image(self.full_path,
+                                                    self.mime_type,
+                                                    None, SIZE_LARGE)
+        self.photo.set_from_pixbuf(self.large_pixbuf)
+
+
+    def leave_notify(self, widget, event):
+        """
+        """
+        self.photo.set_from_pixbuf(self.normal_pixbuf)
 
 
     def _handle_button_press(self, widget, event):
