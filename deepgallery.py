@@ -185,7 +185,7 @@ class DeepGallery(Gramplet):
         self.connect(self.dbstate.db, 'media-update', self.update)
 
 
-    def main(self): # return false finishes
+    def main(self):
         """
         Generator which will be run in the background.
 
@@ -239,12 +239,11 @@ class ImageBox(Gtk.Box):
         """
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
 
-        desc = media.get_description()
-
         photo = DeepPhoto(dbstate, uistate, media)
         photo.set_halign(Gtk.Align.START)
         self.pack_start(photo, False, False, 5)
 
+        desc = media.get_description()
         desc_label = Gtk.Label(label=desc)
         desc_label.set_halign(Gtk.Align.START)
         desc_label.set_justify(Gtk.Justification.LEFT)
@@ -293,6 +292,7 @@ class DeepPhoto(Gtk.EventBox):
 
     def _enter_notify(self, widget, event):
         """
+        Replace the thumbnail with the large image.
         """
         if not self.large_pixbuf:
             self.large_pixbuf = get_thumbnail_image(self.full_path,
@@ -303,12 +303,15 @@ class DeepPhoto(Gtk.EventBox):
 
     def _leave_notify(self, widget, event):
         """
+        Replace the thumbnail with the normal-sized image.
         """
         self.photo.set_from_pixbuf(self.normal_pixbuf)
 
 
     def _handle_button_press(self, widget, event):
         """
+        Handle putton press. On double-click, open the edit media window.
+        On right-click, open a menu.
         """
         if (event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS
                 and event.button == 1):
@@ -325,7 +328,7 @@ class DeepPhoto(Gtk.EventBox):
 
     def _show_menu(self, widget, event):
         """
-        Show right-click menu
+        Show right-click menu.
         """
         menu = Gtk.Menu()
         add_menuitem(menu, MSG_VIEW, widget,
@@ -348,7 +351,7 @@ class DeepPhoto(Gtk.EventBox):
     @classmethod
     def _add_menu_separator(cls, menu):
         """
-        Add separator to menu
+        Add separator to menu.
         """
         sep = Gtk.SeparatorMenuItem()
         sep.show()
